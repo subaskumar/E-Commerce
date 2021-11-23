@@ -60,6 +60,12 @@ def mobile_view(request, data = None):
     }
     return render(request, 'electroApp/Mobile.html',context)
 
+def SearchProduct(request):
+    if request.method == 'GET':
+        searched = request.GET['searched']
+        searched_product = Product.objects.filter(brand__icontains = searched) | Product.objects.filter(title__icontains = searched)
+        return render(request,'electroApp/Mobile.html',{'mobiles': searched_product })
+
 
 def product_detail_view(request,id):
     phone = Product.objects.get(id = id)
