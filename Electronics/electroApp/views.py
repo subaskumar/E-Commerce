@@ -380,7 +380,23 @@ def paymentDone(request):
         user = request.user
         addr_id = request.POST.get('address')
         pay_method = request.POST.get('payment')
-            #request.session['phone'] = phone
+        #request.session['phone'] = phone
+        # total_amount = OrderPlaced.objects.get(user=request.user).get_total_price()
+        # if pay_method =="Paytm":
+        #     param_dict={
+
+        #     'MID': 'WorldP64425807474247',
+        #     'ORDER_ID': 'order.order_id',
+        #     'TXN_AMOUNT': int(total_amount),
+        #     'CUST_ID': 'email',
+        #     'INDUSTRY_TYPE_ID': 'Retail',
+        #     'WEBSITE': 'WEBSTAGING',
+        #     'CHANNEL_ID': 'WEB',
+        #     'CALLBACK_URL':'http://127.0.0.1:8000/shop/handlepayment/',
+
+        #     }
+        #     param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, merchant_key)
+        #     return  render(request, 'electroApp/paytm.html', {'param_dict': param_dict})
         address = Customer.objects.get(Q(phone = user) & Q(id=addr_id))
         cart = Cart.objects.filter(user_cart = user)
         for c in cart:
@@ -392,6 +408,23 @@ def paymentDone(request):
         print(address.locality)
         print(pay_method)
         return redirect('orders')
+    
+    
+# @csrf_exempt  
+# def  handlepayment(request):
+#     response_dict = {}
+#     for i in form.keys():
+#         response_dict[i] = form[i]
+#         if i == 'CHECKSUMHASH':
+#             checksum = form[i]
+#     verify = Checksum.verify_checksum(response_dict, merchant_key, checksum)
+#     if verify:
+#         if response_dict['RESCODE'] == '01':
+#             print("order sucessfull")
+#         else:
+#             print("order fails" + response_dict['RESPONSE'])
+            
+#     return render(request, 'electroApp/paytmstatus', {'response':response_dict })
     
     
 def Orders(request):
