@@ -42,6 +42,7 @@ urlpatterns = [
     path('mobile/<slug:data>', views.mobile_view , name="mobile"),
     path('ProductDetails/<int:id>',views.product_detail_view,name="Product_Detail"),
     path('account/password_change/', views.password_change ,name='password_change'),
+    path('SearchItem/', views.SearchProduct , name="search")
 
 
 
