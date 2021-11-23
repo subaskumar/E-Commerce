@@ -239,8 +239,3 @@ class OrderPlaced(models.Model):
     def __str__(self):
         return self.product.title + ' for User ' + self.user.phone
     
-    #def get_total_price(self):
-    #    total = 0
-    #    for order_item in self.items.all():
-    #        total += order_item.get_final_price()
-    #    return total
